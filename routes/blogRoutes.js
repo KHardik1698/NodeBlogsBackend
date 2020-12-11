@@ -1,9 +1,7 @@
 const express = require("express");
 const blogRoute = express.Router();
+const { getAllBlogs } = require("../controllers/blogControllers");
 
-blogRoute.route("/").get((req, res) => {
-  console.log("Route /blogs/ reached");
-  res.send("End of request");
-});
+blogRoute.route("/").get(getAllBlogs);
 
 module.exports = blogRoute;
