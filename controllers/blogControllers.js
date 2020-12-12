@@ -10,6 +10,12 @@ const getAllBlogs = (req, res, next) => {
   });
 };
 
+const getBlogById = (req, res, next) => {
+  console.log(req.params);
+  res.send("Get Blog by Id request added");
+};
+
 module.exports = {
   getAllBlogs,
+  getBlogById,
 };
