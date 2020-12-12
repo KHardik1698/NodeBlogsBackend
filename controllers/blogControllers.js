@@ -11,8 +11,19 @@ const getAllBlogs = (req, res, next) => {
 };
 
 const getBlogById = (req, res, next) => {
-  console.log(req.params);
-  res.send("Get Blog by Id request added");
+  let data = blogsData.find((blog) => {
+    return blog.id == req.params.id;
+  });
+  if (data) {
+    res.status(200).json({
+      message: "Successful",
+      data: data,
+    });
+  } else {
+    res.status(404).json({
+      message: "Unsuccessful",
+    });
+  }
 };
 
 module.exports = {
