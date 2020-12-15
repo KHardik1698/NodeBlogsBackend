@@ -9,6 +9,16 @@ The Endpoint to get All the Blogs is:
 
     /blogs
 
+Here, if only /blogs endpoint is used, then we will get all the Blogs.
+
+The Endpoint to get a single Blog or multiple Blogs using Query Parameters is:
+
+    /blogs?QueryParameter=Value
+
+    /blogs?QueryParameter1=Value1&QueryParameter2=Value2
+
+Here, if there are any Query Parameters after the /blogs endpoint, then we will get the Blogs which will match those Query Parameters.
+
 The Endpoint to get a single blog by Id is:
 
     /blogs/blogId
@@ -34,6 +44,8 @@ Depending on the request route(path) & the http request type, the router will re
 
 The Controllers Component is used to process the request, perform some operations depending on the type of request, & sending back a response, either a Success Response or an Error Response.\
 The Controller for the Endpoint "/blogs" will return all the Blog Objects if the Blogs are present, otherwise it will return an Error Message.\
+It can also take additional Query Parameters after "/blogs" Endpoint.\
+If the Blog Object or multiple Blog Objects have the matching Query Parameters, then those Blog Objects are returned, otherwise it will return an Error Message.\
 The Controller for the Endpoint "/blogs/blogId" will return the Blog Object with matching Id if the Blog is present, otherwise it will return an Error Message.\
 The Controllers use Helper Functions to generate a Success Message or an Error Message.
 
