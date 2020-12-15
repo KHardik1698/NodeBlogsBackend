@@ -7,15 +7,22 @@ const sendError = require("../helpers/sendError");
 const AppError = require("../helpers/appErrorClass");
 
 const getAllBlogs = (req, res, next) => {
-  let blogsPresent = false;
   let data = blogsData.filter((blog) => {
-    blogsPresent = true;
-    return blog;
+    return Object.keys(req.query).every((param) => {
+      return blog[param] == req.query[param];
+    });
   });
-  if (blogsPresent) {
+  if (data.length == blogsData.length) {
     sendResponse(
       200,
       "Request for getting all the Blogs was Successful.",
+      data,
+      res
+    );
+  } else if (data.length !== 0) {
+    sendResponse(
+      200,
+      "Request for getting the Blogs with Query Parameter was Successful.",
       data,
       res
     );
