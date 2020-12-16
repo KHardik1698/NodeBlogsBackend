@@ -8,6 +8,23 @@ const AppError = require("../helpers/appErrorClass");
 
 const getAllBlogs = (req, res, next) => {
   let data = blogsData.filter((blog) => {
+    if (req.query.author) {
+      let blogAuthor = blog.author.split("  ");
+      let authorName = req.query.author.trim().split(" ");
+      let result;
+      if (
+        (blogAuthor[0] == authorName[0] && blogAuthor[1] == authorName[1]) ||
+        (blogAuthor[0] == authorName[1] && blogAuthor[1] == authorName[0])
+      ) {
+        result = true;
+      } else if (
+        (blogAuthor[0] == authorName[0] && authorName[1] == undefined) ||
+        (blogAuthor[1] == authorName[0] && authorName[1] == undefined)
+      ) {
+        result = true;
+      }
+      if (result == true) req.query.author = blog.author;
+    }
     return Object.keys(req.query).every((param) => {
       return blog[param] == req.query[param];
     });
